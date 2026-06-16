@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Frontend-only dynamic student portfolio generator with live preview, themes, local storage, and export tools."
+    />
+    <title>Dynamic Student Portfolio Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Student Portfolio Studio</p>
+          <h1>Dynamic Student Portfolio Generator</h1>
+        </div>
+
+        <div class="header-actions">
+          <label class="theme-toggle" for="darkModeToggle">
+            <input id="darkModeToggle" type="checkbox" />
+            <span>Dark Mode</span>
+          </label>
+          <button class="ghost-btn" id="resetBtn" type="button">Reset</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="builder-panel" aria-label="Portfolio builder form">
+          <div class="stepper" aria-label="Form steps">
+            <button class="step-tab active" type="button" data-step="0">Personal</button>
+            <button class="step-tab" type="button" data-step="1">Education</button>
+            <button class="step-tab" type="button" data-step="2">Skills</button>
+            <button class="step-tab" type="button" data-step="3">Projects</button>
+            <button class="step-tab" type="button" data-step="4">Social</button>
+          </div>
+
+          <form id="portfolioForm" class="portfolio-form">
+            <fieldset class="form-step active" data-step-panel="0">
+              <legend>Personal Information</legend>
+              <div class="field-grid">
+                <label>
+                  <span>Full Name</span>
+                  <input id="fullName" name="fullName" type="text" placeholder="Aarav Mehta" />
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input id="email" name="email" type="email" placeholder="aarav@example.com" />
+                </label>
+                <label>
+                  <span>Phone Number</span>
+                  <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" />
+                </label>
+                <label>
+                  <span>Profile Photo Upload</span>
+                  <input id="photoUpload" type="file" accept="image/*" />
+                </label>
+              </div>
+              <label>
+                <span>Short Bio</span>
+                <textarea id="bio" name="bio" rows="5" placeholder="Write a concise introduction about your interests, strengths, and career goals."></textarea>
+              </label>
+            </fieldset>
+
+            <fieldset class="form-step" data-step-panel="1">
+              <legend>Education</legend>
+              <label>
+                <span>College Name</span>
+                <input id="college" name="college" type="text" placeholder="National Institute of Technology" />
+              </label>
+              <div class="field-grid">
+                <label>
+                  <span>Degree</span>
+                  <input id="degree" name="degree" type="text" placeholder="B.Tech in Computer Science" />
+                </label>
+                <label>
+                  <span>Graduation Year</span>
+                  <input id="gradYear" name="gradYear" type="number" min="1970" max="2099" placeholder="2027" />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-step" data-step-panel="2">
+              <legend>Skills</legend>
+              <div id="skillsList" class="dynamic-list"></div>
+              <button class="secondary-btn" id="addSkillBtn" type="button">Add Skill</button>
+            </fieldset>
+
+            <fieldset class="form-step" data-step-panel="3">
+              <legend>Projects</legend>
+              <div id="projectsList" class="dynamic-list"></div>
+              <button class="secondary-btn" id="addProjectBtn" type="button">Add Project</button>
+            </fieldset>
+
+            <fieldset class="form-step" data-step-panel="4">
+              <legend>Social Links</legend>
+              <label>
+                <span>GitHub</span>
+                <input id="github" name="github" type="url" placeholder="https://github.com/username" />
+              </label>
+              <label>
+                <span>LinkedIn</span>
+                <input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/username" />
+              </label>
+              <label>
+                <span>Portfolio URL</span>
+                <input id="portfolioUrl" name="portfolioUrl" type="url" placeholder="https://yourportfolio.com" />
+              </label>
+            </fieldset>
+
+            <div class="form-footer">
+              <button class="ghost-btn" id="prevStepBtn" type="button">Previous</button>
+              <button class="secondary-btn" id="nextStepBtn" type="button">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="preview-panel" aria-label="Live portfolio preview">
+          <div class="preview-toolbar">
+            <div>
+              <p class="eyebrow">Live Preview</p>
+              <h2>Your portfolio updates instantly</h2>
+            </div>
+            <label class="template-picker">
+              <span>Template</span>
+              <select id="themeSelect">
+                <option value="modern">Modern Theme</option>
+                <option value="dark">Dark Theme</option>
+                <option value="minimal">Minimal Theme</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="portfolioPreview" class="portfolio-preview theme-modern"></div>
+
+          <div class="export-actions">
+            <button class="primary-btn" id="downloadHtmlBtn" type="button">Download Portfolio</button>
+            <button class="secondary-btn" id="downloadPdfBtn" type="button">Download Resume PDF</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
